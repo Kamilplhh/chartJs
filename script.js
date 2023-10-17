@@ -35,7 +35,7 @@ svg.selectAll("circle")
     .attr("cy", function (d) { return d.height; })
     .attr("r", 5)
     .attr("id", function (d) { return d.id; } )
-    .attr("fill", "blue");
+    .attr("fill", function() { return "#" + Math.floor(Math.random()*16777215).toString(16); });
 
 svg.selectAll("text.product-label-left")
     .data(data)
@@ -62,3 +62,9 @@ svg.selectAll("text.product-label-right")
 
 
 
+    $(document).ready(function(){
+        $("button").click(function(){
+            let id = $(this).attr('id');
+            $('#' + id).toggle();
+        });
+      });
