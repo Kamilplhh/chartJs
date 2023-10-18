@@ -26,7 +26,7 @@ let data = [
     {
         id: "i2",
         color: "blue",
-        ratings: [1, 1, 1, 1, 5]
+        ratings: [1, 1.5, 1, 1, 5]
     },
     {
         id: "i3",
@@ -69,7 +69,7 @@ $.each(data, function (i) {
             .attr("cx", function () { return xScale(object[i]) + 400; })
             .attr("cy", function () { return (number * 60) + 60; })
             .attr("r", 6)
-            .attr("id", function () { return id; })
+            .attr("class", function () { return id; })
             .attr("stroke", function () { return color; })
             .attr("stroke-width", 4)
             .attr("fill", "none");
@@ -104,7 +104,9 @@ $(document).ready(function () {
     test();
     $("button").click(function () {
         let id = $(this).attr('id');
-        $('#' + id).toggle();
+        $('.' + id).each( function () {
+            $(this).toggle();
+        })
     });
 });
 
