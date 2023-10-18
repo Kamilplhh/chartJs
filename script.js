@@ -1,69 +1,102 @@
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 
-let data = [
-    { product: "Prince Polo", rating: 1, height: 50, id: "i1" },
-    { product: "Grzesiek", rating: 2, height: 110, id: "i2" },
-    { product: "Knoopers", rating: 0, height: 170, id: "i3" },
-    { product: "Chipsy", rating: 4, height: 230, id: "i4" },
-    { product: "Gumisie", rating: 3, height: 290, id: "i5" }
+let categoryL = [
+    { category: "AUTENTYCZNA" },
+    { category: "DROGA" },
+    { category: "PROSTA" },
+    { category: "PROFESJONALNA" },
+    { category: "AUTENTYCZNA" }
 ];
 
-let width = 1200;
+let categoryR = [
+    { category: "FAŁSZYWA" },
+    { category: "TANIA" },
+    { category: "SKOMPLIKOWANA" },
+    { category: "AMATORSKA" },
+    { category: "FAŁSZYWA" }
+];
+
+let data = [
+    {
+        id: "i1",
+        color: "red",
+        ratings: [0, 2, 5, 2, 0]
+    },
+    {
+        id: "i2",
+        color: "blue",
+        ratings: [1, 1, 1, 1, 5]
+    },
+    {
+        id: "i3",
+        color: "green",
+        ratings: [1, 2, 4, 5, 0]
+    }
+];
+
+let width = 1500;
 let height = 400;
-let array = ["NIENAWIDZE", "NIE LUBIE", "NATURALNIE", "LUBIE", "KOCHAM"]
+let array = ["ZDECYDOWANIE", "BARDZO", "RACZEJ", "ANI, ANI", "RACZEJ", "BARDZO", "ZDECYDOWANIE"]
 
 let xScale = d3.scaleLinear()
-    .domain([0, 4])
-    .range([0, (width - 400)]);
+    .domain([0, 6])
+    .range([0, (width - 500)]);
 
 let svg = d3.select("#likertChart")
     .append("svg")
-    .attr("width", 1700)
+    .attr("width", width + 300)
     .attr("height", height);
 
 svg.selectAll("text.category")
     .data(array)
     .enter()
     .append("text")
-    .text(function (d) { return d; })
-    .attr("x", function (d, i) { return i * ((width-400) / 4); })
+    .text(function (a) { return a; })
+    .attr("x", function (a, i) { return xScale(i) + 390 })
     .attr("y", 20)
-    .attr("text-anchor", "start")
-    .attr("class", "category");
+    .attr("text-anchor", "end")
+    .attr("font-size", ".9em")
+    .attr("fill", "grey");
 
-svg.selectAll("circle")
-    .data(data)
-    .enter()
-    .append("circle")
-    .attr("cx", function (d) { return xScale(d.rating) + 100; })
-    .attr("cy", function (d) { return d.height + 10; })
-    .attr("r", 5)
-    .attr("id", function (d) { return d.id; })
-    .attr("fill", function () { return "#" + Math.floor(Math.random() * 16777215).toString(16); });
+$.each(data, function (i) {
+    let id = data[i].id;
+    let object = data[i].ratings;
+    let color = data[i].color;
+    $.each(object, function (i) {
+        let number = i;
+        svg.append("circle")
+            .attr("cx", function () { return xScale(object[i]) + 400; })
+            .attr("cy", function () { return (number * 60) + 60; })
+            .attr("r", 6)
+            .attr("id", function () { return id; })
+            .attr("stroke", function () { return color; })
+            .attr("stroke-width", 4)
+            .attr("fill", "none");
+    })
+})
 
-svg.selectAll("text.product-label-left")
-    .data(data)
-    .enter()
-    .append("text")
-    .text(function (d) { return d.product; })
-    .attr("x", 0)
-    .attr("y", function (d) { return d.height; })
-    .attr("dy", "0.35em")
-    .attr("text-anchor", "start")
-    .attr("class", "product-label-left");
-
-svg.selectAll("text.product-label-right")
-    .data(data)
+svg.selectAll("text.category-label-left")
+    .data(categoryL)
     .enter()
     .append("text")
-    .text(function (d) { return d.product; })
-    .attr('position', 'absolute')
-    .attr("x", width - 100)
-    .attr("y", function (d) { return d.height; })
+    .text(function (c) { return c.category; })
+    .attr("x", 350)
+    .attr("y", function (c, i) { return (i * 60) + 45; })
     .attr("dy", "0.35em")
     .attr("text-anchor", "end")
-    .attr("class", "product-label-right");
+    .attr("class", "category-label-left");
+
+svg.selectAll("text.category-label-right")
+    .data(categoryR)
+    .enter()
+    .append("text")
+    .text(function (c) { return c.category; })
+    .attr("x", width - 50)
+    .attr("y", function (c, i) { return (i * 60) + 45; })
+    .attr("dy", "0.35em")
+    .attr("text-anchor", "start")
+    .attr("class", "category-label-right");
 
 
 
@@ -77,24 +110,23 @@ $(document).ready(function () {
 
 function test() {
     let height = 0;
-    $.each(data, function () {
-        height = height +60;
+    $.each(categoryL, function () {
+        height = height + 60;
         ctx.beginPath();
         ctx.setLineDash([5, 1]);
         ctx.moveTo(0, height);
-        ctx.lineTo(1100, height);
+        ctx.lineTo(canvas.width, height);
         ctx.stroke();
     })
-    
-    let diff = (width - 400)/(array.length -1);
-    let place = 100;
-    for(let z = 1;z <= array.length; z++){
+
+    let diff = (width - 500) / (array.length - 1);
+    let place = 400;
+    for (let z = 1; z <= array.length; z++) {
         ctx.beginPath();
         ctx.setLineDash([5, 1]);
         ctx.moveTo(place, 0);
-        ctx.lineTo(place, height+50);
+        ctx.lineTo(place, height + 50);
         ctx.stroke();
         place = place + diff;
-        console.log(place);
     }
 }
