@@ -104,9 +104,41 @@ $(document).ready(function () {
     test();
     $("button").click(function () {
         let id = $(this).attr('id');
-        $('.' + id).each( function () {
+        $('.' + id).each(function () {
             $(this).toggle();
         })
+    });
+    $("a").click(function () {
+        if (!$(this).hasClass('done')) {
+            let x1 = 0;
+            let x2 = 0;
+            let y1 = 0;
+            let y2 = 0;
+            $('.i3').each(function (i) {
+                let color = $(this).attr('stroke');
+                if (i > 0) {
+                    x2 = $(this).attr('cx');
+                    y2 = $(this).attr('cy');
+
+                    svg.append('line')
+                        .style("stroke", color)
+                        .attr("x1", x1)
+                        .attr("y1", y1)
+                        .attr("x2", x2)
+                        .attr("y2", y2)
+                        .attr("class", "line");
+                }
+                x1 = $(this).attr('cx');
+                y1 = $(this).attr('cy');
+            })
+            $(this).addClass('done');
+        }
+        else {
+            $('.line').each(function (i) {
+                $(this).remove();
+            })
+            $(this).removeClass('done');
+        };
     });
 });
 
@@ -118,6 +150,7 @@ function test() {
         ctx.setLineDash([5, 1]);
         ctx.moveTo(0, height);
         ctx.lineTo(canvas.width, height);
+        ctx.strokeStyle = "rgba(0, 0, 0, 0.2)";
         ctx.stroke();
     })
 
@@ -128,7 +161,10 @@ function test() {
         ctx.setLineDash([5, 1]);
         ctx.moveTo(place, 0);
         ctx.lineTo(place, height + 50);
+        ctx.strokeStyle = "rgba(0, 0, 0, 0.2)";
         ctx.stroke();
         place = place + diff;
     }
+
+
 }
