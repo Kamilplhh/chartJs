@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Wykres Likert Scale</title>
     <script src="https://d3js.org/d3.v7.min.js"></script>
@@ -8,13 +9,21 @@
         .likertChart {
             padding-left: 100px;
         }
+        canvas {
+            position: absolute;
+            padding-left: 100px;
+            opacity: 0.5;
+        }
     </style>
 </head>
+
 <body>
+    <canvas id="canvas" width="1400" height="400"></canvas>
     <div class="likertChart" id="likertChart"></div>
-    <script src="script.js"></script>
     <button id="i1">PrincePolo</button>
     <button id="i2">Grzesiek</button>
     <button id="i3">Knoopers</button>
+    <script src="script.js"></script>
 </body>
+
 </html>
