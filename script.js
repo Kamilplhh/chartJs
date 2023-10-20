@@ -141,7 +141,7 @@ $(document).ready(function () {
     //     };
     // });
     $('#expand').click(function () {
-        $('#collapseDiv').css('width','250px');
+        $('#collapseDiv').css('width','25%');
     })
 
     $('#closeBtn').click(function () {

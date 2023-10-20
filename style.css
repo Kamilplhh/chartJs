@@ -46,7 +46,7 @@ a {
     right: 0;
     background-color: #111;
     overflow-x: hidden;
-    transition: 0.2s;
+    transition: 0.7s;
     background-color: white;
     -webkit-box-shadow: -4px 0px 24px 0px rgba(66, 68, 90, 1);
     -moz-box-shadow: -4px 0px 24px 0px rgba(66, 68, 90, 1);
@@ -56,4 +56,5 @@ a {
 #closeBtn {
     cursor: pointer;
     font-style: normal !important;
+    font-weight: bold;
 }
