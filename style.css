@@ -5,3 +5,26 @@ canvas {
 a {
     cursor: pointer;
 }
+
+.rounded-circle {
+    width: 75px !important;
+    height: 75px !important;
+    background-color: white;
+}
+
+.navTop {
+    background-color: rgb(199, 198, 198);
+}
+
+.navRow {
+    display: inline-block !important;
+}
+
+.Navi {
+    color: grey !important;
+}
+
+.selected {
+    color: black !important;
+    border-bottom: 1px solid black !important;
+}
