@@ -58,3 +58,9 @@ a {
     font-style: normal !important;
     font-weight: bold;
 }
+
+.small {
+    width: 50px !important;
+    height: 50px !important;
+    background-color: grey;
+}
