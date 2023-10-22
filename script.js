@@ -36,16 +36,17 @@ let data = [
 ];
 
 let width = 1500;
+let range = width * 1/3;
 let height = 400;
 let array = ["ZDECYDOWANIE", "BARDZO", "RACZEJ", "ANI, ANI", "RACZEJ", "BARDZO", "ZDECYDOWANIE"]
 
 let xScale = d3.scaleLinear()
     .domain([0, 6])
-    .range([0, (width - 500)]);
+    .range([0, (width*2/3)]);
 
 let svg = d3.select("#likertChart")
     .append("svg")
-    .attr("width", width + 300)
+    .attr("width", width + (range))
     .attr("height", height);
 
 svg.selectAll("text.category")
@@ -53,7 +54,7 @@ svg.selectAll("text.category")
     .enter()
     .append("text")
     .text(function (a) { return a; })
-    .attr("x", function (a, i) { return xScale(i) + 390 })
+    .attr("x", function (a, i) { return xScale(i) + (range - 10 ) })
     .attr("y", 20)
     .attr("text-anchor", "end")
     .attr("font-size", ".9em")
@@ -66,7 +67,7 @@ $.each(data, function (i) {
     $.each(object, function (i) {
         let number = i;
         svg.append("circle")
-            .attr("cx", function () { return xScale(object[i]) + 400; })
+            .attr("cx", function () { return xScale(object[i]) + range; })
             .attr("cy", function () { return (number * 60) + 60; })
             .attr("r", 6)
             .attr("class", function () { return id; })
@@ -81,7 +82,7 @@ svg.selectAll("text.category-label-left")
     .enter()
     .append("text")
     .text(function (c) { return c.category; })
-    .attr("x", 350)
+    .attr("x", range - 10)
     .attr("y", function (c, i) { return (i * 60) + 45; })
     .attr("dy", "0.35em")
     .attr("text-anchor", "end")
@@ -92,7 +93,7 @@ svg.selectAll("text.category-label-right")
     .enter()
     .append("text")
     .text(function (c) { return c.category; })
-    .attr("x", width - 50)
+    .attr("x", width + 10)
     .attr("y", function (c, i) { return (i * 60) + 45; })
     .attr("dy", "0.35em")
     .attr("text-anchor", "start")
@@ -162,8 +163,8 @@ function test() {
         ctx.stroke();
     })
 
-    let diff = (width - 500) / (array.length - 1);
-    let place = 400;
+    let diff = (width - range) / (array.length - 1);
+    let place = (canvas.width/2) - range;
     for (let z = 1; z <= array.length; z++) {
         ctx.beginPath();
         ctx.setLineDash([5, 1]);
