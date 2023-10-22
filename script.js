@@ -35,14 +35,31 @@ let data = [
     }
 ];
 
-let width = 1500;
-let range = width * 1/3;
+let width = $(window).width();
+if(width > 2000){
+    width = 2000;
+}
+let range = width * 1 / 3;
 let height = 400;
 let array = ["ZDECYDOWANIE", "BARDZO", "RACZEJ", "ANI, ANI", "RACZEJ", "BARDZO", "ZDECYDOWANIE"]
+let font = ".9em";
+let shiftFont = ".85em";
+let shift = range - 10;
+
+if (width <= 1000 && width >= 750) {
+    font = ".8em";
+    shift = range - 3;
+    shiftFont = ".7em";
+} else if (width < 750) {
+    font = ".5em";
+    shiftFont = ".48em"
+    shift = range - 1;
+}
+
 
 let xScale = d3.scaleLinear()
     .domain([0, 6])
-    .range([0, (width*2/3)]);
+    .range([0, (width * 2 / 3)]);
 
 let svg = d3.select("#likertChart")
     .append("svg")
@@ -54,10 +71,10 @@ svg.selectAll("text.category")
     .enter()
     .append("text")
     .text(function (a) { return a; })
-    .attr("x", function (a, i) { return xScale(i) + (range - 10 ) })
+    .attr("x", function (a, i) { return xScale(i) + shift })
     .attr("y", 20)
     .attr("text-anchor", "end")
-    .attr("font-size", ".9em")
+    .attr("font-size", shiftFont)
     .attr("fill", "grey");
 
 $.each(data, function (i) {
@@ -82,9 +99,10 @@ svg.selectAll("text.category-label-left")
     .enter()
     .append("text")
     .text(function (c) { return c.category; })
-    .attr("x", range - 10)
+    .attr("x", range - 20)
     .attr("y", function (c, i) { return (i * 60) + 45; })
     .attr("dy", "0.35em")
+    .attr("font-size", font)
     .attr("text-anchor", "end")
     .attr("class", "category-label-left");
 
@@ -93,16 +111,38 @@ svg.selectAll("text.category-label-right")
     .enter()
     .append("text")
     .text(function (c) { return c.category; })
-    .attr("x", width + 10)
+    .attr("x", width + 20)
     .attr("y", function (c, i) { return (i * 60) + 45; })
     .attr("dy", "0.35em")
+    .attr("font-size", font)
     .attr("text-anchor", "start")
     .attr("class", "category-label-right");
 
 
+let canvasHeight = 0;
+$.each(categoryL, function () {
+    canvasHeight = canvasHeight + 60;
+    ctx.beginPath();
+    ctx.setLineDash([5, 1]);
+    ctx.moveTo(0, canvasHeight);
+    ctx.lineTo(canvas.width, canvasHeight);
+    ctx.strokeStyle = "rgba(0, 0, 0, 0.1)";
+    ctx.stroke();
+})
+
+let diff = (width - range) / (array.length - 1);
+let place = (canvas.width / 2) - range;
+for (let z = 1; z <= array.length; z++) {
+    ctx.beginPath();
+    ctx.setLineDash([5, 1]);
+    ctx.moveTo(place, 0);
+    ctx.lineTo(place, canvasHeight + 50);
+    ctx.strokeStyle = "rgba(0, 0, 0, 0.1)";
+    ctx.stroke();
+    place = place + diff;
+}
 
 $(document).ready(function () {
-    test();
     $(".toggle-btn").click(function () {
         let id = $(this).attr('id');
         $('.' + id).each(function () {
@@ -143,35 +183,13 @@ $(document).ready(function () {
         };
     });
     $('#expand').click(function () {
-        $('#collapseDiv').css('width','25%');
+        $('#collapseDiv').css('width', '25%');
     })
 
     $('#closeBtn').click(function () {
-        $('#collapseDiv').css('width','0px');
+        $('#collapseDiv').css('width', '0px');
     })
 });
 
-function test() {
-    let height = 0;
-    $.each(categoryL, function () {
-        height = height + 60;
-        ctx.beginPath();
-        ctx.setLineDash([5, 1]);
-        ctx.moveTo(0, height);
-        ctx.lineTo(canvas.width, height);
-        ctx.strokeStyle = "rgba(0, 0, 0, 0.2)";
-        ctx.stroke();
-    })
 
-    let diff = (width - range) / (array.length - 1);
-    let place = (canvas.width/2) - range;
-    for (let z = 1; z <= array.length; z++) {
-        ctx.beginPath();
-        ctx.setLineDash([5, 1]);
-        ctx.moveTo(place, 0);
-        ctx.lineTo(place, height + 50);
-        ctx.strokeStyle = "rgba(0, 0, 0, 0.2)";
-        ctx.stroke();
-        place = place + diff;
-    }
-}
+
