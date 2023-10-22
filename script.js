@@ -102,19 +102,20 @@ svg.selectAll("text.category-label-right")
 
 $(document).ready(function () {
     test();
-    $("button").click(function () {
+    $(".toggle-btn").click(function () {
         let id = $(this).attr('id');
         $('.' + id).each(function () {
             $(this).toggle();
         })
     });
-    $("a").click(function () {
+    $(".toggle-chart").click(function () {
+        let id = $(this).attr('id');
         if (!$(this).hasClass('done')) {
             let x1 = 0;
             let x2 = 0;
             let y1 = 0;
             let y2 = 0;
-            $('.i3').each(function (i) {
+            $('.' + id).each(function (i) {
                 let color = $(this).attr('stroke');
                 if (i > 0) {
                     x2 = $(this).attr('cx');
@@ -126,7 +127,7 @@ $(document).ready(function () {
                         .attr("y1", y1)
                         .attr("x2", x2)
                         .attr("y2", y2)
-                        .attr("class", "line");
+                        .attr("class", "line" + id);
                 }
                 x1 = $(this).attr('cx');
                 y1 = $(this).attr('cy');
@@ -134,7 +135,7 @@ $(document).ready(function () {
             $(this).addClass('done');
         }
         else {
-            $('.line').each(function (i) {
+            $('.line' + id).each(function (i) {
                 $(this).remove();
             })
             $(this).removeClass('done');
