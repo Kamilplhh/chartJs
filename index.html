@@ -3,20 +3,99 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Wykres Likert Scale</title>
+    <title>Wykres</title>
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 
 <body>
-    <canvas id="canvas" width="1920px" height="400"></canvas>
-    <div class="likertChart" id="likertChart"></div>
-    <button id="i1">i1</button>
-    <button id="i2">i2</button>
-    <button id="i3">i3</button>
-    <a class="draw">i3</a>
+    <div id="collapseDiv">
+        <div class="container-fluid py-2">
+            <div class="row">
+                <div class="col-md-8 text-left">
+                    Zagadanienia
+                </div>
+                <div class="col-md-3 text-right">
+                    <i id="closeBtn">&#10005;</i> 
+                </div>
+            </div>
+            <div class="d-flex justify-content-start mt-5 pt-2">
+                <div class="px-2">
+                    <img class="rounded-circle small"></img><br>
+                    <a id="i1" class="toggle-chart">
+                        <h3 style="color: red;" class="text-center">&#x2022;</h3>      
+                    </a>                     
+                </div>
+                <a id="i1" class="toggle-btn">
+                    <div>
+                        <b>Jaki jest Andrzej Duda?</b><br>
+                        Badanie wizerunku kandydatówna prezydenta Polski - 12.05.2012
+                    </div>
+                </a>
+            </div>
+            <div class="d-flex justify-content-start pt-2">
+                <div class="px-2">
+                    <img class="rounded-circle small"></img><br>
+                    <a id="i2" class="toggle-chart">
+                        <h3 style="color: blue;" class="text-center">&#x2022;</h3>  
+                    </a>
+                </div>
+                    <a id="i2" class="toggle-btn">
+                        <div>
+                            <b>Jaki jest Janusz Palikot?</b><br>
+                            Badanie wizerunku kandydatówna prezydenta Polski - 12.05.2012
+                        </div>
+                    </a>
+                </div>
+            <div class="d-flex justify-content-start pt-2">
+                <div class="px-2">
+                    <img class="rounded-circle small"></img><br>
+                    <a id="i3" class="toggle-chart">
+                        <h3 style="color: green;" class="text-center">&#x2022;</h3>
+                    </a>
+                </div>
+                <a id="i3" class="toggle-btn">
+                    <div>
+                        <b>Jaki jest Grzegorz Braun?</b><br>
+                        Badanie wizerunku kandydatówna prezydenta Polski - 12.05.2012
+                    </div>
+                </a>     
+            </div> 
+        </div>
+        
+    </div>
+        <nav class="navbutton navbar-light">Zagadanienia
+          <a type="button" id="expand">
+             <span class="navbar-toggler-icon"></span>
+          </a>
+        </nav>
+    <div class="container-fluid navTop">
+        <div class="row py-4">
+            <img class="rounded-circle offset-md-2"></img>
+            <div class="col-md-2">
+                Badanie wizerunku kandydatów na Prezydenta Polski 2015
+              </div>
+        </div>
+        <div class="col-md-2 offset-md-5 d-flex justify-content-around">
+            <a class="py-1 Navi selected">Wykres</a>
+            <a class="py-1 Navi">Wynik tabelarycjny</a>
+        </div>
+    </div>
+    <div class="mt-5 d-flex justify-content-center">
+        <canvas id="canvas" width="4000px" height="400"></canvas>
+        <div class="likertChart" id="likertChart"></div> 
+    </div>
+    
+    <div class="text-center py-4">
+        Interpretacja <br>
+        <p class="font-weight-bold py-4">Wizerunek kandydatów w wyborach prezydenckich 2015.</p>
+    </div>
     <script src="script.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </body>
 
 </html>
