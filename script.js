@@ -145,7 +145,7 @@ $(document).ready(function () {
     $(".toggle-btn").click(function () {
         let id = $(this).attr('id');
         $('.' + id).each(function () {
-            $(this).toggle();
+            $(this).toggleClass('exitC');
         })
     });
     $(".toggle-chart").click(function () {
@@ -176,7 +176,7 @@ $(document).ready(function () {
         }
         else {
             $('.line' + id).each(function (i) {
-                $(this).remove();
+                $(this).addClass('exitL');
             })
             $(this).removeClass('done');
         };

@@ -77,6 +77,14 @@ line {
     animation: slide 1s ease 0s 1 normal forwards !important;
 }
 
+.exitC {
+    animation: exitCircle 1s ease 0s 1 normal forwards !important;
+}
+
+.exitL {
+    animation: exitL 1s ease 0s 1 normal forwards !important;
+}
+
 @keyframes appear {
 	0% {
 		animation-timing-function: ease-in;
@@ -130,5 +138,27 @@ line {
 	100% {
 		opacity: 1;
 		transform: translateX(0);
+	}
+}
+
+@keyframes exitCircle {
+	0% {
+		opacity: 1;
+		transform: translateY(0);
+	}
+
+	100% {
+		opacity: 0;
+		transform: translateY(-50px);
+	}
+}
+
+@keyframes exitL {
+	0% {
+		opacity: 1;
+	}
+
+	100% {
+		opacity: 0;
 	}
 }
