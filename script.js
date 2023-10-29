@@ -56,7 +56,6 @@ if (width <= 1000 && width >= 750) {
     shift = range - 1;
 }
 
-
 let xScale = d3.scaleLinear()
     .domain([0, 6])
     .range([0, (width * 2 / 3)]);
